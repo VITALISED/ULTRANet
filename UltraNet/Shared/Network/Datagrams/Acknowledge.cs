@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace UltraNet.Shared.Network.Datagrams
 {
-    internal class Heartbeat
+    public class Acknowledge : IServerDatagram
     {
+
     }
 }

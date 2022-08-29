@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace UltraNet.Shared.Network
 {
-    public interface IDatagram
+    public enum DatagramChannels
     {
-        byte Identifier { public get; set; }
-
-        void Serialize();
-        void Deserialize();
+        Account = 0,
+        Player = 1,
     }
 }

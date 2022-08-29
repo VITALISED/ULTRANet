@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace UltraNet.Shared.Network.Datagrams
 {
-    internal class IServerDatagram
+    internal class Connect
     {
     }
 }

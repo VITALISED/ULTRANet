@@ -340,8 +340,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\CreateMove.cs" />
-    <Compile Include="IClientDatagram.cs" />
-    <Compile Include="IClientDatagramHeader.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

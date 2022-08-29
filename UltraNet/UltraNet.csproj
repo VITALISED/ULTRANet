@@ -381,11 +381,22 @@
     <Compile Include="Shared\Network\Buffers\PlayerCosmeticBuffer.cs" />
     <Compile Include="Shared\Network\Buffers\PlayerMoveBuffer.cs" />
     <Compile Include="Shared\Network\Buffers\UserConnectionBuffer.cs" />
+    <Compile Include="Shared\Network\ClientHeader.cs" />
     <Compile Include="Shared\Network\ConnectionState.cs" />
+    <Compile Include="Shared\Network\DatagramChannels.cs" />
+    <Compile Include="Shared\Network\DatagramHelpers.cs" />
+    <Compile Include="Shared\Network\DatagramIdentifiers.cs" />
+    <Compile Include="Shared\Network\Datagrams\Acknowledge.cs" />
+    <Compile Include="Shared\Network\Datagrams\Connect.cs" />
+    <Compile Include="Shared\Network\Datagrams\Heartbeat.cs" />
+    <Compile Include="Shared\Network\IClientDatagram.cs" />
+    <Compile Include="Shared\Network\IClientDatagramHeader.cs" />
     <Compile Include="Shared\Network\IDatagram.cs" />
     <Compile Include="Shared\Network\IDatagramHeader.cs" />
-    <Compile Include="Shared\Network\IDatagramPolicy.cs" />
-    <Compile Include="Shared\Network\NetMessage.cs" />
+    <Compile Include="Shared\Network\DatagramPolicy.cs" />
+    <Compile Include="Shared\Network\IServerDatagram.cs" />
+    <Compile Include="Shared\Network\IServerDatagramHeader.cs" />
+    <Compile Include="Shared\Network\ServerHeader.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

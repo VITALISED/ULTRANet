@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UltraNet.Shared.Network;
 
-namespace Client
+namespace UltraNet.Shared.Network
 {
     public interface IClientDatagram : IDatagram
     {
-        byte Version { get; }
-        NetMessageType MessageType { get; }
-        uint ClientID { get; }
+        IClientDatagramHeader Header { get; set; }
     }
 }

@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace UltraNet.Shared.Network
 {
-    public interface IDatagram
+    public interface IServerDatagram : IDatagram
     {
-        byte Identifier { public get; set; }
-
-        void Serialize();
-        void Deserialize();
+        IServerDatagramHeader Header { get; set; }
     }
 }

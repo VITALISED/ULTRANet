@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UltraNet.Shared.Network;
 
-namespace Client
+namespace UltraNet.Shared.Network
 {
     public interface IClientDatagramHeader : IDatagramHeader
     {
-        
+        byte AppVersion { get; }
+        byte MessageType { get; }
+        int ClientId { get; }
     }
 }
