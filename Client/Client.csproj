@@ -339,14 +339,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\Move.cs" />
-    <Compile Include="Client\Player.cs" />
+    <Compile Include="Components\CreateMove.cs" />
     <Compile Include="IClientDatagram.cs" />
+    <Compile Include="IClientDatagramHeader.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Patches\" />
+    <ProjectReference Include="..\UltraNet\UltraNet.csproj">
+      <Project>{85663349-4da3-4f46-be1e-c656c6ba0a84}</Project>
+      <Name>UltraNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

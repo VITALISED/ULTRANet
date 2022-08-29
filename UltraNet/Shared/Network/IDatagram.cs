@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace UltraNet.Shared.Network
 {
-    internal interface IDatagram
+    public interface IDatagram
     {
+        void Serialize();
+        void Deserialize();
     }
 }

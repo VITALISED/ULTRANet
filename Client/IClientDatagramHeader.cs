@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UltraNet.Shared.Network;
 
-namespace UltraNet.Shared.Network
+namespace Client
 {
-    internal class NetCommand
+    public interface IClientDatagramHeader : IDatagramHeader
     {
-        char Name;
-        byte[] Data;
+        
     }
 }

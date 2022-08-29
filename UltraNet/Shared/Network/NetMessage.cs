@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace UltraNet.Shared.Network
 {
-    internal class SendCommand
+    public enum NetMessageType
     {
+        Connecting = 0,
+        Ack = 1,
+        Position = 2,
+        Cosmetics = 3,
+        Animation = 4,
     }
 }

@@ -378,14 +378,14 @@
     <Compile Include="Console\Host.cs" />
     <Compile Include="MelonModMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\Bitfield.cs" />
-    <Compile Include="Shared\ConnectionState.cs" />
+    <Compile Include="Shared\Network\Buffers\PlayerCosmeticBuffer.cs" />
+    <Compile Include="Shared\Network\Buffers\PlayerMoveBuffer.cs" />
+    <Compile Include="Shared\Network\Buffers\UserConnectionBuffer.cs" />
+    <Compile Include="Shared\Network\ConnectionState.cs" />
     <Compile Include="Shared\Network\IDatagram.cs" />
     <Compile Include="Shared\Network\IDatagramHeader.cs" />
     <Compile Include="Shared\Network\IDatagramPolicy.cs" />
-    <Compile Include="Shared\Network\NetCommand.cs" />
-    <Compile Include="Shared\Network\NetworkPacket.cs" />
-    <Compile Include="Shared\Network\SendCommand.cs" />
+    <Compile Include="Shared\Network\NetMessage.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

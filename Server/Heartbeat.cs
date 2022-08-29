@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Client
+namespace Server
 {
-    internal class Move
+    internal class Heartbeat
     {
     }
 }

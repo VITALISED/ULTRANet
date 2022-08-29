@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UltraNet.Shared.Network
 {
-    internal interface IDatagramHeader
+    public interface IDatagramHeader
     {
         long TransmissionTime { get; } // replace with ticks later perhaps?
         byte SequenceNumber { get; }
