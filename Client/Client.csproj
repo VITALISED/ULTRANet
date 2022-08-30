@@ -37,6 +37,9 @@
     <Reference Include="Facepunch.Steamworks.Win64">
       <HintPath>..\include\Facepunch.Steamworks.Win64.dll</HintPath>
     </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>..\include\MelonLoader.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Security">
       <HintPath>..\include\Mono.Security.dll</HintPath>
     </Reference>
@@ -340,7 +343,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\CreateMove.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="CLMain.cs" />
+    <Compile Include="Console\Connect.cs" />
+    <Compile Include="MelonModMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using UltraNet.Shared.Network;
+using UltraNet.Shared.Network.Datagrams;
 
 namespace Server
 {
@@ -27,10 +28,11 @@ namespace Server
         private int _packetBufferSize;
         private ServerSpecification _serverPolicy;
         private ServerMessage _serverMessage;
+        private DatagramHelpers _datagramHelpers;
 
         public UDPServer()
         {
-            ServerPort = 80085;
+            ServerPort = 25569;
             _packetBufferSize = 512;
 
             // Setup our socket for use
@@ -39,20 +41,22 @@ namespace Server
 
             // Bind and configure the socket so we are always given the client end point packet information, such as their IP, when data is received.
             _socket.Bind(_endPoint);
-            isRunning = true;
 
-            //while (isRunning)
-            //    Listen(_socket);
+            _serverMessage = new ServerMessage();
+            _serverPolicy = ServerSpecification.None;
+            _datagramHelpers = new DatagramHelpers();
+
+            isRunning = true;
         }
 
-        public void Listen(Socket socket)
+        public void Listen()
         {
             // The BeginReceiveFrom requires us to give it an endpoint, even though we don't use it.
-            PacketState state = new PacketState(socket, _packetBufferSize) { Destination = (EndPoint)new IPEndPoint(IPAddress.Any, ServerPort) };
+            PacketState state = new PacketState(_socket, _packetBufferSize) { Destination = (EndPoint)new IPEndPoint(IPAddress.Any, ServerPort) };
             byte[] buffer = state.Buffer;
             EndPoint destination = state.Destination;
 
-            socket.BeginReceiveFrom(
+            _socket.BeginReceiveFrom(
                 state.Buffer,
                 0,
                 _packetBufferSize,
@@ -86,10 +90,10 @@ namespace Server
                 if (header.Policy.HasFlag(DatagramPolicy.AcknowledgementRequired) ||
                     _serverPolicy.HasFlag(ServerSpecification.RequireAcknowledgement))
                 {
-                    ServerMessage.SendClient(new Acknowledge(), endPoint);
+                    _serverMessage.SendClient(new Acknowledge(), endPoint);
                 }
 
-                IClientDatagram datagram = CreateDatagramFromClientHeader(header);
+                IClientDatagram datagram = _datagramHelpers.CreateDatagramFromClientHeader(header);
                 if (datagram == null)
                 {
                     // TODO: handle null

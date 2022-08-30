@@ -7,7 +7,11 @@ using UnityEngine;
 
 namespace Client
 {
-    internal class Main : MonoBehaviour
+    public class CLMain : MonoBehaviour
     {
+        public void Guh(string formattedEndpoint)
+        {
+
+        }
     }
 }

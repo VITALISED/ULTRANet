@@ -18,13 +18,12 @@ namespace UltraNet.Shared.Network
                 .GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes().Where(type => datagramInterfaceType.IsAssignableFrom(type)));
 
-            this.cacheDatagramTypes(datagramTypes);
-
+            cacheDatagramTypes(datagramTypes);
         }
 
         public DatagramHelpers(IEnumerable<Type> datagramTypes)
         {
-            this.cacheDatagramTypes(datagramTypes);
+            cacheDatagramTypes(datagramTypes);
         }
 
         private void cacheDatagramTypes(IEnumerable<Type> datagramTypes)

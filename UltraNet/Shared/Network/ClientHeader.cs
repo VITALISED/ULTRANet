@@ -4,23 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UltraNet.Shared.Network;
 
 namespace UltraNet.Shared.Network
 {
     public class ClientHeader : IClientDatagramHeader
     {
-        public int ClientId { get; set; }
-        public byte AppVersion { get; private set; }
-        public bool IsLastInSequence { get; private set; }
-        public byte MessageType { get; private set; }
-        public long TransmissionTime { get; private set; }
-        public byte Channel { get; private set; }
-        public DatagramPolicy Policy { get; private set; }
-        public byte SequenceNumber { get; private set; }
-    
         public ClientHeader()
-        { }
+        {
+        }
 
         public ClientHeader(
             byte appVersion,
@@ -29,41 +20,57 @@ namespace UltraNet.Shared.Network
             DatagramPolicy policy,
             byte sequenceNumber)
         {
-            AppVersion = appVersion;
-            MessageType = messageType;
-            TransmissionTime = transmission.Ticks;
-            Policy = policy;
-            SequenceNumber = sequenceNumber;
-            TransmissionTime = transmission.Ticks;
+            this.AppVersion = appVersion;
+            this.MessageType = messageType;
+            this.TransmissionTime = transmission.Ticks;
+            this.Policy = policy;
+            this.SequenceNumber = sequenceNumber;
+            this.TransmissionTime = transmission.Ticks;
         }
+
+        public int ClientId { get; set; }
+
+        public byte AppVersion { get; private set; }
+
+        public bool IsLastInSequence { get; private set; }
+
+        public byte MessageType { get; private set; }
+
+        public long TransmissionTime { get; private set; }
+
+        public byte Channel { get; private set; }
+
+        public DatagramPolicy Policy { get; private set; }
+
+        public byte SequenceNumber { get; private set; }
 
         public void Serialize(BinaryWriter serializer)
         {
-            serializer.Write(AppVersion);
-            serializer.Write(MessageType);
-            serializer.Write(IsLastInSequence);
-            serializer.Write(TransmissionTime);
-            serializer.Write(Channel);
-            serializer.Write((byte)Policy);
+            serializer.Write(this.AppVersion);
+            serializer.Write(this.MessageType);
+            serializer.Write(this.IsLastInSequence);
+            serializer.Write(this.TransmissionTime);
+            serializer.Write(this.Channel);
+            serializer.Write((byte)this.Policy);
 
-            if (Policy.HasFlag(DatagramPolicy.SequencedMessage))
+            if (this.Policy.HasFlag(DatagramPolicy.SequencedMessage))
             {
-                serializer.Write(SequenceNumber);
+                serializer.Write(this.SequenceNumber);
             }
         }
 
         public void Deserialize(BinaryReader deserializer)
         {
-            AppVersion = deserializer.ReadByte();
-            MessageType = deserializer.ReadByte();
-            IsLastInSequence = deserializer.ReadBoolean();
-            TransmissionTime = deserializer.ReadInt64();
-            Channel = deserializer.ReadByte();
-            Policy = (DatagramPolicy)deserializer.ReadByte();
+            this.AppVersion = deserializer.ReadByte();
+            this.MessageType = deserializer.ReadByte();
+            this.IsLastInSequence = deserializer.ReadBoolean();
+            this.TransmissionTime = deserializer.ReadInt64();
+            this.Channel = deserializer.ReadByte();
+            this.Policy = (DatagramPolicy)deserializer.ReadByte();
 
-            if (Policy.HasFlag(DatagramPolicy.SequencedMessage))
+            if (this.Policy.HasFlag(DatagramPolicy.SequencedMessage))
             {
-                SequenceNumber = deserializer.ReadByte();
+                this.SequenceNumber = deserializer.ReadByte();
             }
         }
 

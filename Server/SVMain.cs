@@ -8,18 +8,24 @@ using UnityEngine;
 
 namespace Server
 {
-    public class Main : MonoBehaviour
+    public class SVMain : MonoBehaviour
     {
         private UDPServer _server;
+        bool _started;
 
-        public void Awake()
+        public void Guh()
         {
+            _started = true;
             _server = new UDPServer();
         }
 
         public void FixedUpdate()
         {
-            _server.OnTick();
+            if(_started)
+            {
+                MelonLoader.MelonLogger.Msg("OnTick");
+                _server.Listen();
+            }
         }
     }
 }

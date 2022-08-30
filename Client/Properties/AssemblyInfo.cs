@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using MelonLoader;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -34,3 +35,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+[assembly: MelonInfo(typeof(Client.MelonModMain), "ULTRANET Client", "0.0.1", "VITALISED")]
+[assembly: MelonGame("Hakita", "ULTRAKILL")]

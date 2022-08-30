@@ -1,14 +1,12 @@
-﻿using MelonLoader;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UltraNet
+namespace Client
 {
-    public class MelonModMain : MelonMod
+    internal class MelonModMain
     {
-
     }
 }
