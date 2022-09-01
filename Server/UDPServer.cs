@@ -100,6 +100,8 @@ namespace Server
                 }
 
                 datagram.Deserialize(reader);
+
+                _serverMessage.ManageClientMessage(datagram, endPoint);
             }
         }
     }

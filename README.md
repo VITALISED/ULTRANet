@@ -1,3 +1,3 @@
 # UltraNet
 
-Currently unfinished ghostnet for ULTRAKILL. Add me on VITALISED#7081 if this is interesting.
+Currently unfinished ghostnet for ULTRAKILL. You can join the super official ultranet discord if you want (people adding me directly on discord sucks): <https://discord.gg/taHZwrKbVU>
