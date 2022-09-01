@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,14 @@ namespace UltraNet.Shared.Network.Datagrams
         public IServerDatagramHeader Header { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public byte Identifier { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public void Serialize(System.IO.BinaryWriter serializer)
+        public void Serialize(BinaryWriter serializer)
         {
             serializer.Write(this.MessageIdAcknowledged);
         }
 
-        public void Deserialize(System.IO.BinaryReader deserializer)
+        public void Deserialize(BinaryReader deserializer)
         {
-            this.MessageIdAcknowledged = deserializer.ReadInt32();
+            MessageIdAcknowledged = deserializer.ReadInt32();
         }
 
         public bool IsValid()

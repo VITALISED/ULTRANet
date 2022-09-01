@@ -382,7 +382,7 @@
     <Compile Include="Shared\Network\DatagramHelpers.cs" />
     <Compile Include="Shared\Network\DatagramIdentifiers.cs" />
     <Compile Include="Shared\Network\Datagrams\Acknowledge.cs" />
-    <Compile Include="Shared\Network\Datagrams\Connect.cs" />
+    <Compile Include="Shared\Network\Datagrams\Hello.cs" />
     <Compile Include="Shared\Network\Datagrams\Heartbeat.cs" />
     <Compile Include="Shared\Network\Datagrams\Movement.cs" />
     <Compile Include="Shared\Network\IClientDatagram.cs" />

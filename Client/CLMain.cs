@@ -10,11 +10,16 @@ namespace Client
 {
     public class CLMain : MonoBehaviour
     {
-        IPEndPoint ipEndpoint;
+        private UDPClient _client;
 
         public void Guh(string formattedEndpoint)
         {
-            ipEndpoint = 
+            string[] subs = formattedEndpoint.Split(':');
+            IPAddress ip = IPAddress.Parse(subs[0]);
+            int port = int.Parse(subs[1]);
+            IPEndPoint ipEndpoint = new IPEndPoint(ip, port);
+
+            _client = new UDPClient(ipEndpoint, port);
         }
     }
 }

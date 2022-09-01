@@ -17,7 +17,7 @@ namespace Server
             {
                 MonoSingleton<GameConsole.Console>.Instance.RegisterCommands(new ICommand[1]
                 {
-               new Host()
+                    new Host()
                 });
             } catch (Exception e)
             {
