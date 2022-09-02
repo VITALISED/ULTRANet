@@ -20,7 +20,7 @@ namespace Client.Console
         {
             try
             {
-                GameObject.Find("Player").AddComponent<CLMain>().Guh(args[0]);
+                GameObject.Find("Player").AddComponent<CLMain>().Guh("127.0.0.1:25569");
             }
             catch (Exception e)
             {

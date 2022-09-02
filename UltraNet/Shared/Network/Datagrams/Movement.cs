@@ -19,7 +19,8 @@ namespace UltraNet.Shared.Network.Datagrams
         public float PositionY;
         public float PositionZ;
         public IClientDatagramHeader Header { get; set; }
-        public byte Identifier { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private static byte _identifier = (byte)DatagramIdentifiers.Movement;
+        public byte Identifier { get { return _identifier; } set { _identifier = value; } }
 
         public void Serialize(System.IO.BinaryWriter serializer)
         {

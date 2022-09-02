@@ -23,7 +23,7 @@ namespace Server
         {
             if(_started)
             {
-                MelonLoader.MelonLogger.Msg("OnTick");
+                //MelonLoader.MelonLogger.Msg("OnTick");
                 _server.Listen();
             }
         }

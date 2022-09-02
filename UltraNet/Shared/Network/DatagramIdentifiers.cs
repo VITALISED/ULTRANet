@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace UltraNet.Shared.Network
 {
-    public class DatagramIdentifiers
+    public enum DatagramIdentifiers
     {
-        public const byte Hello = 0;
+        Hello = 0,
+        Movement = 1,
+        Heartbeat = 2,
+        Acknowledge = 3,
     }
 }

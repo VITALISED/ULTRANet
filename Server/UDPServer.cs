@@ -73,6 +73,8 @@ namespace Server
             Socket socket = state.UdpSocket;
             EndPoint endPoint = state.Destination;
 
+            MelonLoader.MelonLogger.Msg("Got Client Packet!!!");
+
             //IClientDatagramHeader header = new ClientHeader();
 
             using (var reader = new BinaryReader(new MemoryStream(state.Buffer)))

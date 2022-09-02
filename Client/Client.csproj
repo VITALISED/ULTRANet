@@ -347,6 +347,7 @@
     <Compile Include="CLMain.cs" />
     <Compile Include="Console\Connect.cs" />
     <Compile Include="MelonModMain.cs" />
+    <Compile Include="PacketState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UDPClient.cs" />
   </ItemGroup>

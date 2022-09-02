@@ -10,8 +10,11 @@ namespace UltraNet.Shared.Network.Datagrams
     public class Acknowledge : IServerDatagram
     {
         public int MessageIdAcknowledged { get; set; }
-        public IServerDatagramHeader Header { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public byte Identifier { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int ClientID { get; set; }
+        public IServerDatagramHeader Header { get; set; }
+
+        private static byte _identifier = (byte)DatagramIdentifiers.Hello;
+        public byte Identifier { get { return _identifier; } set { _identifier = value; } }
 
         public void Serialize(BinaryWriter serializer)
         {

@@ -28,6 +28,8 @@ namespace UltraNet.Shared.Network
 
         private void cacheDatagramTypes(IEnumerable<Type> datagramTypes)
         {
+            // most inefficient and poorly written C# i will ever write
+
             foreach (Type datagram in datagramTypes)
             {
                 if (datagram.IsAbstract || !datagram.IsClass)
@@ -35,8 +37,16 @@ namespace UltraNet.Shared.Network
                     continue;
                 }
 
-                IDatagram propertyInfo = (IDatagram)datagram.GetInterface("IDatagram");
-                _datagrams.Add(propertyInfo.Identifier, datagram);
+                PropertyInfo[] propertyInfo = datagram.GetType().GetProperties();
+
+                foreach(PropertyInfo pinfo in propertyInfo)
+                {
+                    if(pinfo.Name == "Identifier")
+                    {
+                        _datagrams.Add((byte)pinfo.GetValue(datagram), datagram);
+                    }
+                }
+
             }
         }
 

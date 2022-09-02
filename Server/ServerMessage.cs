@@ -35,6 +35,16 @@ namespace Server
             //if (!datagram.isValid())
             //    return;
 
+            IServerDatagramHeader header = new ServerHeader(
+                1,
+                datagram.Identifier,
+                DateTime.Now,
+                DatagramPolicy.None,
+                1
+                );
+
+            datagram.Header = header;
+
             MemoryStream memoryStream = new MemoryStream();
             byte[] data = null;
             using (var binaryWriter = new BinaryWriter(memoryStream))
@@ -51,7 +61,7 @@ namespace Server
         {
             switch(datagram.Header.MessageType)
             {
-                case DatagramIdentifiers.Hello:
+                case (byte)DatagramIdentifiers.Hello:
                     _players.Add(new SVPlayer());
                     //SendAllClients()
                     break;

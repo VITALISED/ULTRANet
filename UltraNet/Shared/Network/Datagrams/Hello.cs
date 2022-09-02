@@ -11,16 +11,16 @@ namespace UltraNet.Shared.Network.Datagrams
     {
         public bool Local;
         public IClientDatagramHeader Header { get; set; }
-        public byte Identifier { get; set; }
-
+        private static byte _identifier = (byte)DatagramIdentifiers.Hello;
+        public byte Identifier { get { return _identifier; } set { _identifier = value; } }
         public void Deserialize(BinaryReader reader)
         {
-            throw new NotImplementedException();
+            Local = reader.ReadBoolean();
         }
 
         public void Serialize(BinaryWriter writer)
         {
-            throw new NotImplementedException();
+            writer.Write(Local);
         }
     }
 }

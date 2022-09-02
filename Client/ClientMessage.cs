@@ -34,5 +34,8 @@ namespace Client
                 _socket.SendTo(data, _endpoint);
             }
         }
+
+        public void ManageServerMessage(IServerDatagram datagram)
+        { }
     }
 }

@@ -20,6 +20,13 @@ namespace Client
             IPEndPoint ipEndpoint = new IPEndPoint(ip, port);
 
             _client = new UDPClient(ipEndpoint, port);
+
+            _client.ConnectToServer();
+        }
+
+        public void FixedUpdate()
+        {
+            _client.Listen();
         }
     }
 }
