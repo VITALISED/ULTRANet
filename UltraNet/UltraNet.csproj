@@ -373,6 +373,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\Console.cs" />
     <Compile Include="Shared\Network\Buffers\PlayerCosmeticBuffer.cs" />
     <Compile Include="Shared\Network\Buffers\PlayerMoveBuffer.cs" />
     <Compile Include="Shared\Network\Buffers\UserConnectionBuffer.cs" />
@@ -385,6 +386,7 @@
     <Compile Include="Shared\Network\Datagrams\Hello.cs" />
     <Compile Include="Shared\Network\Datagrams\Heartbeat.cs" />
     <Compile Include="Shared\Network\Datagrams\Movement.cs" />
+    <Compile Include="Shared\Network\Datagrams\WorldPlayerMove.cs" />
     <Compile Include="Shared\Network\IClientDatagram.cs" />
     <Compile Include="Shared\Network\IClientDatagramHeader.cs" />
     <Compile Include="Shared\Network\IDatagram.cs" />

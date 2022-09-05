@@ -21,7 +21,7 @@ namespace Server
                 });
             } catch (Exception e)
             {
-                // lazy but works 
+                MelonLogger.Msg(e);
             }
         }
     }

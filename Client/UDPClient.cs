@@ -13,45 +13,55 @@ namespace Client
 {
     public class UDPClient
     {
+        public ClientMessage ClientMessage;
         private Socket _socket;
-        private ClientMessage _clientMessage;
         private int _port;
         private DatagramHelpers _datagramHelpers;
-        private bool _connected;
+        public bool Connected;
         private int _packetBufferSize;
+        public IPEndPoint _endPoint;
+        public IPEndPoint _localEndpoint;
 
         public UDPClient(IPEndPoint ipEndpoint, int port)
         {
             _datagramHelpers = new DatagramHelpers();
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            _clientMessage = new ClientMessage(_socket, ipEndpoint);
+            ClientMessage = new ClientMessage(_socket, ipEndpoint);
             _port = port;
             _packetBufferSize = 512;
-            _connected = false;
+            Connected = false;
+            _endPoint = ipEndpoint;
+            _localEndpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
         }
 
         public void ConnectToServer()
         {
+            _socket.Bind(_localEndpoint);
+
+            Connected = true;
+
             IClientDatagramHeader header = new ClientHeader(
                 1,
                 (byte)DatagramIdentifiers.Hello,
                 DateTime.Now,
-                (DatagramPolicy.SequencedMessage | DatagramPolicy.AcknowledgementRequired),
+                DatagramPolicy.AcknowledgementRequired,
                 1);
 
             Hello datagram = new Hello();
             datagram.Header = header;
             datagram.Identifier = (byte)DatagramIdentifiers.Hello;
             datagram.Local = true;
-
-            _clientMessage.SendServer(datagram);
+            ClientMessage.SendServer(datagram);
         }
         public void Listen()
         {
             // The BeginReceiveFrom requires us to give it an endpoint, even though we don't use it.
-            PacketState state = new PacketState(_socket, _packetBufferSize) { Destination = (EndPoint)new IPEndPoint(IPAddress.Any, _port) };
+            PacketState state = new PacketState(_socket, _packetBufferSize) { Destination = _endPoint };
             byte[] buffer = state.Buffer;
             EndPoint destination = state.Destination;
+
+            if (!Connected)
+                return;
 
             _socket.BeginReceiveFrom(
                 state.Buffer,
@@ -61,6 +71,7 @@ namespace Client
                 ref destination,
                 new AsyncCallback(ResolveServerData),
                 state);
+
         }
 
         public void ResolveServerData(IAsyncResult ar)
@@ -84,6 +95,8 @@ namespace Client
                 {
                     throw new InvalidDataException("The header being returned was malformed.");
                 }
+                MelonLoader.MelonLogger.Msg("appver thing: " + header.AppVersion);
+                MelonLoader.MelonLogger.Msg("header thing: " + header.MessageType);
 
                 IServerDatagram datagram = _datagramHelpers.CreateDatagramFromServerHeader(header);
                 if (datagram == null)
@@ -93,7 +106,7 @@ namespace Client
 
                 datagram.Deserialize(reader);
 
-                _clientMessage.ManageServerMessage(datagram);
+                ClientMessage.ManageServerMessage(datagram);
             }
         }
     }

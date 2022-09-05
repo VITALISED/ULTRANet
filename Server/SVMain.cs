@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace Server
 {
@@ -16,14 +17,14 @@ namespace Server
         public void Guh()
         {
             _started = true;
+            MelonLoader.MelonLogger.Msg("Creating Server...");
             _server = new UDPServer();
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
             if(_started)
             {
-                //MelonLoader.MelonLogger.Msg("OnTick");
                 _server.Listen();
             }
         }

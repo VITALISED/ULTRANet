@@ -25,7 +25,6 @@ namespace UltraNet.Shared.Network
             this.TransmissionTime = transmission.Ticks;
             this.Policy = policy;
             this.SequenceNumber = sequenceNumber;
-            this.TransmissionTime = transmission.Ticks;
         }
 
         public int ClientId { get; set; }

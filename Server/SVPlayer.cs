@@ -8,13 +8,14 @@ using UnityEngine;
 
 namespace Server
 {
-    internal class SVPlayer
+    public struct SVPlayer
     {
         public EndPoint Endpoint;
-        public byte UserID;
-        Quaternion viewAngles;
-        float PosX;
-        float PosY;
-        float PosZ;
+        public int UserID;
+
+        public SVPlayer(int userID, EndPoint endPoint)
+        {
+            UserID = userID; Endpoint = endPoint;
+        }
     }
 }

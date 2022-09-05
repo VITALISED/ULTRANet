@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using UltraNet.Shared;
 using UltraNet.Shared.Network;
 using UltraNet.Shared.Network.Datagrams;
 
@@ -16,7 +17,6 @@ namespace Server
     {
         None = 0,
         RequireAcknowledgement = 1,
-
     }
 
     internal class UDPServer
@@ -29,6 +29,7 @@ namespace Server
         private ServerSpecification _serverPolicy;
         private ServerMessage _serverMessage;
         private DatagramHelpers _datagramHelpers;
+        public List<SVPlayer> ServerPlayers;
 
         public UDPServer()
         {
@@ -42,7 +43,7 @@ namespace Server
             // Bind and configure the socket so we are always given the client end point packet information, such as their IP, when data is received.
             _socket.Bind(_endPoint);
 
-            _serverMessage = new ServerMessage();
+            _serverMessage = new ServerMessage(this);
             _serverPolicy = ServerSpecification.None;
             _datagramHelpers = new DatagramHelpers();
 
@@ -68,14 +69,11 @@ namespace Server
 
         public void ReceiveClientData(IAsyncResult ar)
         {
+            Logger.Msg("Received client packet");
             PacketState state = (PacketState)ar.AsyncState;
 
             Socket socket = state.UdpSocket;
             EndPoint endPoint = state.Destination;
-
-            MelonLoader.MelonLogger.Msg("Got Client Packet!!!");
-
-            //IClientDatagramHeader header = new ClientHeader();
 
             using (var reader = new BinaryReader(new MemoryStream(state.Buffer)))
             {
@@ -88,22 +86,45 @@ namespace Server
                     throw new InvalidDataException("The header being returned was malformed.");
                 }
 
-                // Acknowledge that we received the packet if it is required.
-                if (header.Policy.HasFlag(DatagramPolicy.AcknowledgementRequired) ||
-                    _serverPolicy.HasFlag(ServerSpecification.RequireAcknowledgement))
-                {
-                    _serverMessage.SendClient(new Acknowledge(), endPoint);
-                }
+                Logger.Msg(header.AppVersion + " appver");
+                Logger.Msg(header.Policy + " policy");
+                Logger.Msg(header.MessageType + " type");
 
+                // Acknowledge that we received the packet if it is required.
+                //if (header.Policy.HasFlag(DatagramPolicy.AcknowledgementRequired) ||
+                //    _serverPolicy.HasFlag(ServerSpecification.RequireAcknowledgement))
+                //{
+                //    Acknowledge ack = new Acknowledge(); // change this to a different dgram later
+                //    ack.MessageIdAcknowledged = 1;
+
+                //    if (header.ClientId == 0)
+                //    {
+                //        SVPlayer newPlayer = new SVPlayer(new Random().Next(1, 10000000), endPoint);
+                //        ack.ClientID = newPlayer.UserID;
+                //        ServerPlayers.Add(newPlayer);
+                //        _serverMessage.SendClient(ack, endPoint);
+                //    }
+                //    else
+                //    {
+                //        foreach (SVPlayer player in ServerPlayers)
+                //        {
+                //            if(header.ClientId == player.UserID)
+                //            {
+                //                ack.ClientID = header.ClientId;
+                //            }
+                //        }
+                //    }
+
+                //}
                 IClientDatagram datagram = _datagramHelpers.CreateDatagramFromClientHeader(header);
                 if (datagram == null)
                 {
+                    Logger.Msg("Null datagram :/");
                     // TODO: handle null
                 }
-
                 datagram.Deserialize(reader);
-
                 _serverMessage.ManageClientMessage(datagram, endPoint);
+
             }
         }
     }
